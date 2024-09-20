@@ -1,0 +1,54 @@
+<div class="seat-booking-container">
+<!-- Input field for user to predefine booked seats -->
+<div class="pre-booked-input">
+  <label for="bookedSeatsInput">Enter booked seat numbers (comma-separated):</label>
+  <input 
+    type="text" 
+    [(ngModel)]="bookedSeatsInput" 
+    placeholder="e.g. 1,2,3" 
+    id="bookedSeatsInput"
+  />
+  <button (click)="initializePreBookedSeats()">Set Pre-booked Seats</button>
+</div>
+
+<!-- Input field and button for seat booking -->
+<div class="seat-booking-input">
+  <label for="numSeats">Enter number of seats to book (1 to 7):</label>
+  <input 
+    type="number" 
+    [(ngModel)]="numSeats" 
+    min="1" 
+    max="7" 
+    id="numSeats"
+  />
+  <button (click)="bookSeats(numSeats)">Book Seats</button>
+</div>
+
+<!-- Button to reset all seats -->
+<div class="reset-seats">
+  <button (click)="resetSeats()">Reset All Seats</button>
+</div>
+
+<!-- Display of seats: 0 = available, 1 = booked -->
+<div class="seats-display">
+  <h3>Seats Layout</h3>
+  <div class="seats-grid">
+    <div *ngFor="let seat of seats; let i = index" class="seat" [class.booked]="seat === 1">
+      Seat {{ i + 1 }}: 
+      <span *ngIf="seat === 0">Available</span>
+      <span *ngIf="seat === 1">Booked</span>
+    </div>
+  </div>
+</div>
+
+<!-- Display list of booked seats -->
+<div class="booked-seats">
+  <h3>Booked Seats</h3>
+  <div *ngIf="bookedSeatsList.length > 0">
+    <p>Booked seat numbers: {{ bookedSeatsList.join(', ') }}</p>
+  </div>
+  <div *ngIf="bookedSeatsList.length === 0">
+    <p>No seats booked yet.</p>
+  </div>
+</div>
+</div>
